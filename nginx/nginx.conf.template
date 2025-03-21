@@ -19,7 +19,7 @@ http {
         ssl_certificate /etc/nginx/ssl/fullchain.pem;
         ssl_certificate_key /etc/nginx/ssl/privkey.pem;
 
-        location /sub/ {
+        location ${URL} {
             proxy_pass http://app:8000;
             proxy_set_header Host $host;
         }
