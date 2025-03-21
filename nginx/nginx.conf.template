@@ -7,8 +7,14 @@ http {
     default_type text/plain;
 
     server {
+        listen 80;
+        server_name ${SERVER_NAME};
+        return 301 https://$host$request_uri;
+    }
+
+    server {
         listen 443 ssl;
-        server_name freakhosting.malam.or.id;
+        server_name ${SERVER_NAME};
 
         ssl_certificate /etc/nginx/ssl/fullchain.pem;
         ssl_certificate_key /etc/nginx/ssl/privkey.pem;
@@ -19,4 +25,3 @@ http {
         }
     }
 }
-
