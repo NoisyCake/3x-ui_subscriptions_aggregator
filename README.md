@@ -1,6 +1,11 @@
 # 3x-ui_subscriptions_aggregator
 Обратный прокси для асинхронного получения и объединения подписок по заданным URL и ID.
 
+Подробное описание проекта доступно на сайте автора: https://noisycake.ru/projects/subs_aggregator
+
+> [!NOTE]
+> Инструкция актуальна для Debian-based дистрибутивов Linux
+
 ## Подготовка
 
 ### Сертификат
@@ -8,7 +13,7 @@
 
 После получения домена выполните следующие команды (порты 80 и 443 должны быть открыты):
 ```bash
-sudo apt update && sudo apt upgrade
+sudo apt update && sudo apt upgrade -y
 sudo apt install certbot
 
 sudo certbot certonly --standalone -d <domain> --register-unsafely-without-email
@@ -53,15 +58,19 @@ cp .env.template .env
 |URL|Часть пути подписки|/sub/|
 |CERT_PATH|Путь к SSL/TLS сертификату|/etc/letsencrypt/live/domain.or.subdomain|
 
-### Доступ
-После настройки новая подписка будет доступна по адресу `https://domain.or.subdomain/sub/subscription_id`, где subscription_id — имя подписки в 3x-ui серверах.
-
 ---
 ## Запуск
 
 Запуск происходит командой `docker compose up --build -d`.
 
+Новая подписка будет доступна по пдресу `https://domain.or.subdomain/sub/subscription_id`, где subscription_id — имя подписки в 3x-ui серверах.
+
 ---
 ## Лицензия
 
-Этот проект распространяется под лицензией MIT. Подробности в файле `LICENSE`.
+Проект распространяется под лицензией MIT. Подробности в файле `LICENSE`.
+
+---
+## Изменения
+
+Буду рад любой критике и предложениям по улучшению!
