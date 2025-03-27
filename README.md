@@ -24,9 +24,6 @@ sudo certbot certonly --standalone -d <domain> --register-unsafely-without-email
 ### Подписки
 Для каждого сервера с 3x-ui нужно настроить функцию подписки. Для клиентов, подписки которых вы хотите объединить, требуется установить одинаковый **subscription_id**.
 
-> [!NOTE]
-> Приложение работает на 443 порту, поэтому он должен быть свободен.
-
 ![Сервер 1](https://i.ibb.co/672ypTMt/image.png)
 
 ![Сервер 2](https://i.ibb.co/sSn9byZ/2025-03-18-153330.png)
@@ -55,6 +52,7 @@ cp .env.template .env
 |:--:|:--|:--|
 |SUB_URLS|Адреса прокси-серверов, на которых функционирует 3x-ui с функцией подписки. |'https://first.server.com:41570/subscription/ https://second.server.com:7081/sub/'|
 |SERVER_NAME|Доменное имя сервера, на котором установлено приложение|domain.or.subdomain|
+|PORT|Порт, на котором будет работать приложение (по возможности оставьте дефолтный)|443|
 |URL|Часть пути подписки|/sub/|
 |CERT_PATH|Путь к SSL/TLS сертификату|/etc/letsencrypt/live/domain.or.subdomain|
 
@@ -63,7 +61,7 @@ cp .env.template .env
 
 Запуск происходит командой `docker compose up --build -d`.
 
-Новая подписка будет доступна по пдресу `https://domain.or.subdomain/sub/subscription_id`, где subscription_id — имя подписки в 3x-ui серверах.
+Новая подписка будет доступна по адресу `https://domain.or.subdomain/sub/subscription_id`, где subscription_id — имя подписки в 3x-ui серверах.
 
 ---
 ## Лицензия

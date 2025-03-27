@@ -13,7 +13,7 @@ services:
     env_file:
       - .env
     ports:
-      - 443:443
+      - ${PORT}:${PORT}
     environment:
       - SERVER_NAME=${SERVER_NAME}
       - URL=${URL}
