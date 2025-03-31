@@ -1,8 +1,12 @@
-worker_processes 1;
+worker_processes auto;
 
-events {}
+events {
+    worker_connections 4096;
+    multi_accept on;
+}
 
 http {
+    tcp_nodelay on;
     include mime.types;
     default_type text/plain;
 

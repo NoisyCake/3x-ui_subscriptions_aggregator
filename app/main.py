@@ -23,7 +23,7 @@ load_dotenv()
 # Функция для получения подписок по URL и последующего декодирования данных в base64
 async def fetch_subscription(client, sub_url: str, sub_id: str) -> Optional[bytes]:
     try:
-        sub = await client.get(f'{sub_url}{sub_id}', timeout=5)
+        sub = await client.get(f'{sub_url}{sub_id}', timeout=10)
         sub.raise_for_status()
         return base64.b64decode(sub.text)
     except httpx.HTTPError as e:
