@@ -1,5 +1,4 @@
 worker_processes auto;
-
 events {
     worker_connections 4096;
     multi_accept on;
@@ -23,7 +22,8 @@ http {
         ssl_certificate /etc/nginx/ssl/fullchain.pem;
         ssl_certificate_key /etc/nginx/ssl/privkey.pem;
 
-        location ${URL} {
+        location ~ ^/${URL}/[^/]+/?${SUB_NAME} {
+            rewrite ^/(${URL})/([^/]+)/${SUB_NAME} /$1/$2 break;
             proxy_pass http://app:8000;
             proxy_set_header Host $host;
         }
