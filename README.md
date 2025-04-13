@@ -50,8 +50,8 @@ cp .env.template .env
 В файле `.env` содержатся несколько переменных, которые нужно настроить:
 |variable|description|example|
 |:--:|:--|:--|
-|SUB_URLS|Адреса прокси-серверов, на которых работает 3x-ui с функцией подписки. |'https://first.server.com:41570/subscription/ https://second.server.com:7081/sub/'|
-|SUB_NAME|Имя подписки, которое будет отображаться в клиенте. Если не указана, именем станет subscription_id из 3x-ui. |HFK|
+|SUB_URLS|Адреса прокси-серверов, на которых работает 3x-ui с функцией подписки|'https://first.server.com:41570/subscription/ https://second.server.com:7081/sub/'|
+|SUB_NAME|Имя подписки, которое будет отображаться в клиенте. Если не указана, именем станет subscription_id из 3x-ui|HFK|
 |SERVER_NAME|Доменное имя сервера, на котором установлено приложение|domain.or.subdomain|
 |PORT|Порт, на котором будет работать приложение (по возможности оставьте дефолтный)|443|
 |URL|Часть пути подписки|sub|

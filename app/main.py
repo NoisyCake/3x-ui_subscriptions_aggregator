@@ -18,6 +18,7 @@ logger = logging.getLogger(__name__)
 app = FastAPI()
 
 load_dotenv()
+path = os.getenv('URL')
 
 
 # Функция для получения подписок по URL и последующего декодирования данных в base64
@@ -33,7 +34,7 @@ async def fetch_subscription(client, sub_url: str, sub_id: str) -> Optional[byte
         
         
 # Функция для объединения подписок
-@app.get('/sub/{sub_id}')
+@app.get(f'/{path}/{{sub_id}}')
 async def merge_subscriptions(sub_id: str) -> Response:
     sub_urls = os.getenv('SUB_URLS').split()
     
