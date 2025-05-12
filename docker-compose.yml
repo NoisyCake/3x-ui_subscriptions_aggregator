@@ -1,15 +1,13 @@
 services:
   app:
     build: ./app
-    container_name: fastapi
     env_file:
       - .env
-    ports:
-      - 8000:8000
+    networks:
+      - aggregator-net
 
   nginx:
     build: ./nginx
-    container_name: nginx_fastapi
     env_file:
       - .env
     ports:
@@ -22,3 +20,9 @@ services:
       - ${CERT_PATH}/privkey.pem:/etc/nginx/ssl/privkey.pem
     depends_on:
       - app
+    networks:
+      - aggregator-net
+
+networks:
+  aggregator-net:
+    driver: bridge

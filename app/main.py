@@ -3,7 +3,6 @@ import httpx
 import base64
 import logging
 from asyncio import gather
-from typing import Optional
 from dotenv import load_dotenv
 from fastapi import FastAPI, Response, HTTPException
 
@@ -22,7 +21,7 @@ path = os.getenv('URL')
 
 
 # Функция для получения подписок по URL и последующего декодирования данных в base64
-async def fetch_subscription(client, sub_url: str, sub_id: str) -> Optional[bytes]:
+async def fetch_subscription(client, sub_url: str, sub_id: str) -> bytes | None:
     try:
         sub = await client.get(f'{sub_url}{sub_id}', timeout=10)
         sub.raise_for_status()
