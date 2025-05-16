@@ -10,12 +10,6 @@ http {
     default_type text/plain;
 
     server {
-        listen 80;
-        server_name ${SERVER_NAME};
-        return 301 https://$host:${PORT}$request_uri;
-    }
-
-    server {
         listen ${PORT} ssl;
         server_name ${SERVER_NAME};
 

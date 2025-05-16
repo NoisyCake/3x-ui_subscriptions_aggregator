@@ -1,12 +1,11 @@
-import logging.handlers
 import os
 import httpx
 import base64
 import logging
+import logging.handlers
 from asyncio import gather
 from dotenv import load_dotenv
 from fastapi import FastAPI, Response, HTTPException
-import uvicorn
 
 
 # Logging configuration with rotation every 3 days
@@ -43,6 +42,7 @@ async def fetch_links() -> tuple[list[str], list[str]]:
     '''
     github_token = os.getenv('GITHUB_TOKEN')
     headers = {}
+    # If token is provided, use it for private repo access
     if github_token:
         headers = {
             "Authorization": f"token {os.getenv('GITHUB_TOKEN')}",
@@ -51,7 +51,7 @@ async def fetch_links() -> tuple[list[str], list[str]]:
     try:
         async with httpx.AsyncClient() as client:
             response = await client.get(
-                os.getenv('CONFIG_URLS'),
+                os.getenv('CONFIG_URL'),
                 headers=headers,
                 timeout=6
             )
@@ -118,6 +118,7 @@ async def merge_all(sub_links: list[str], vless_links: list[str], sub_id: str) -
         tmp = await gather(*decoded_subs)
         data = [x for x in tmp if x is not None]
         
+        # If there is no configs at all
         if not data and not vless_links:
             logger.error("No subscriptions or configurations available")
             raise HTTPException(
@@ -127,7 +128,7 @@ async def merge_all(sub_links: list[str], vless_links: list[str], sub_id: str) -
         elif not data:
             logger.warning("No subscriptions available")
 
-        encoded_vless_links = [link.encode('utf-8') for link in vless_links]
+        encoded_vless_links = [link.encode() for link in vless_links]
         merged_subs = b''.join(data)
         merged_configs = b'\n'.join(encoded_vless_links)
 
@@ -155,6 +156,3 @@ async def main(sub_id: str = "") -> Response:
     global_sub = base64.b64encode(result)
 
     return Response(content=global_sub, media_type='text/plain')
-
-if __name__ == "__main__":
-    uvicorn.run("main:app", reload=True)
