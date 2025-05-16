@@ -1,8 +1,8 @@
 <div align="center" markdown>
 
 <p align="center">
-    <a href="https://github.com/NoisyCake/3x-ui_subscriptions_aggregator/blob/dev/README.md"><u><b>ENGLISH</b></u></a> •
-    <a href="https://github.com/NoisyCake/3x-ui_subscriptions_aggregator/blob/dev/README.ru.md"><u><b>РУССКИЙ</b></u></a>
+    <a href="https://github.com/NoisyCake/3x-ui_subscriptions_aggregator/blob/main/README.md"><u><b>ENGLISH</b></u></a> •
+    <a href="https://github.com/NoisyCake/3x-ui_subscriptions_aggregator/blob/main/README.ru.md"><u><b>РУССКИЙ</b></u></a>
 </p>
 
 # vless_config_aggregator
