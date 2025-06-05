@@ -35,47 +35,55 @@ load_dotenv()
 
 async def fetch_links() -> tuple[list[str], list[str]]:
     '''
-    Fetches the configuration source file from GitHub.\n
+    Fetches the configuration source file from GitHub or local .txt file.\n
     Returns a tuple of two lists:
         - HTTP subscription links
         - Direct vless configuration links
     '''
-    github_token = os.getenv('GITHUB_TOKEN')
-    headers = {}
-    # If token is provided, use it for private repo access
-    if github_token:
-        headers = {
-            "Authorization": f"token {os.getenv('GITHUB_TOKEN')}",
-            "Accept": "application/vnd.github.v3.raw"
-        }
     try:
-        async with httpx.AsyncClient() as client:
-            response = await client.get(
-                os.getenv('CONFIG_URL'),
-                headers=headers,
-                timeout=6
-            )
-            response.raise_for_status()
-            lines = response.text.splitlines()
+        if os.getenv('LOCAL_MODE') == 'on':
+            with open('configs.txt', encoding='utf-8') as file:
+                lines = file.readlines()
+
+        else:
+            github_token = os.getenv('GITHUB_TOKEN')
+            headers = {}
+            # If token is provided, use it for private repo access
+            if github_token:
+                headers = {
+                    "Authorization": f"token {github_token}",
+                    "Accept": "application/vnd.github.v3.raw"
+                }
+            async with httpx.AsyncClient() as client:
+                response = await client.get(
+                    os.getenv('CONFIG_URL'),
+                    headers=headers,
+                    timeout=6
+                )
+                response.raise_for_status()
+                lines = response.text.splitlines()
             
-            sub_links = [
-                line.strip()
-                for line in lines
-                if line.strip().startswith('http')
-            ]
-            vless_links = [
-                line.strip()
-                for line in lines
-                if line.strip().startswith('vless://')
-            ]
+        sub_links = [
+            line.strip()
+            for line in lines
+            if line.strip().startswith('http')
+        ]
+        vless_links = [
+            line.strip()
+            for line in lines
+            if line.strip().startswith('vless://')
+        ]
             
-            return sub_links, vless_links
+        return sub_links, vless_links
     except httpx.HTTPStatusError as e:
         logger.critical(f"GitHub fetch error: {str(e)}")
         raise HTTPException(
             status_code=404,
             detail="Config file not found"
         )
+    except FileNotFoundError as e:
+        logger.critical(e)
+        raise e
 
 
 async def fetch_subscription(

@@ -39,7 +39,7 @@ sudo certbot certonly --standalone -d <domain> --register-unsafely-without-email
 ![Сервер 2](https://i.ibb.co/sSn9byZ/2025-03-18-153330.png)
 
 ### Файл с конфигами
-Чтобы всё заработало, также необходимо создать и разместить в сети текстовый файл со списком всех конфигураций.
+Чтобы всё заработало, также необходимо создать и разместить на GitHub или локально текстовый файл со списком всех конфигураций.
 
 Как уже упоминалось, поддерживаются два вида ссылок: подписки и прямые. Прямые вставляются как есть.  
 Для подписок нужно удалить subscription ID из URL. То есть от `https://<domain>:<port>/<url>/<subscription_id>` должно остаться только `https://<domain>:<port>/<url>/` (обратите внимание на наличие конечного слэша).
@@ -76,13 +76,15 @@ cp .env.template .env
 В файле `.env` содержится несколько переменных, которые нужно настроить:
 |variable|description|example|
 |:--:|:--|:--|
-|CONFIG_URL|Ссылка на `.txt` файл с конфигами|https://api.github.com/.../file.txt|
+|LOCAL_MODE|Если включено, ищет файл на хосте. Иначе пытается достать из удалённого репозитория|on|
+|FILE_PATH|Абсолютный путь к `.txt` файлу конфигураций|/path/to/configs.txt|
+|CONFIG_URL|Ссылка на `.txt` файл конфигураций|https://api.github.com/.../file.txt|
 |GITHUB_TOKEN|Токен доступа GitHub (если файл находится в приватном репозитории)|ghp_dhoauigc7898374yduisdhSDHFHGf7|
 |SUB_NAME|Имя подписки, которое будет отображаться в клиенте. Если не указано, им станет subscription ID из 3x-ui|HFK|
 |SERVER_NAME|Доменное имя сервера, на котором установлен сервис|domain.or.subdomain|
 |PORT|Порт, на котором будет работать сервис|443|
 |URL|Часть пути новой подписки|sub|
-|CERT_PATH|Путь к SSL-сертификату|/etc/letsencrypt/live/domain.or.subdomain|
+|CERT_PATH|Абсолютный путь к SSL-сертификату|/etc/letsencrypt/live/domain.or.subdomain|
 
 ---
 ## Запуск

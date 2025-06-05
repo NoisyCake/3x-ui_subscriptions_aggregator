@@ -3,6 +3,9 @@ services:
     build: ./app
     env_file:
       - .env
+    volumes:
+      - ${FILE_PATH}:/app/configs.txt
+    restart: unless-stopped
     networks:
       - aggregator-net
 
@@ -18,6 +21,7 @@ services:
     volumes:
       - ${CERT_PATH}/fullchain.pem:/etc/nginx/ssl/fullchain.pem
       - ${CERT_PATH}/privkey.pem:/etc/nginx/ssl/privkey.pem
+    restart: unless-stopped
     depends_on:
       - app
     networks:

@@ -37,7 +37,7 @@ All clients you want to merge must share the same **subscription ID**.
 ![Server 2](https://i.ibb.co/sSn9byZ/2025-03-18-153330.png)
 
 ### Configuration file
-To get the service up and running, you'll also need a plain `.txt` file with your list configurations available online.
+To get the service up and running, you'll also need a plain `.txt` file with your list configurations available on GitHub or locally.
 
 As mentioned above, both subscription and direct VLESS links are supported:
 1. Direct `vless://` links go into the file as-is.
@@ -75,13 +75,15 @@ cp .env.template .env
 Edit the `.env` file with your own values:
 |variable|description|example|
 |:--:|:--|:--|
-|CONFIG_URL|Link to your hosted `.txt` config file|https://api.github.com/.../file.txt|
+|LOCAL_MODE|If enabled, the file will be read from the local host. Otherwise, it will be fetched from a remote repository.|on|
+|FILE_PATH|Absolute path to the `.txt` configuration file|/path/to/configs.txt|
+|CONFIG_URL|Link to the `.txt` configuration file hosted on GitHub|https://api.github.com/.../file.txt|
 |GITHUB_TOKEN|GitHub token (required if the file is in a private repo)|ghp_dhoauigc7898374yduisdhSDHFHGf7|
 |SUB_NAME|Display name for the subscription in clients. If empty, the subscription ID will be used in most cases|HFK|
 |SERVER_NAME|Your server’s domain name|domain.or.subdomain|
 |PORT|Port the service should run on|443|
 |URL|Path segment used in the final subscription URL|sub|
-|CERT_PATH|Path to your SSL certificate directory|/etc/letsencrypt/live/domain.or.subdomain|
+|CERT_PATH|Absolute path to your SSL certificate directory|/etc/letsencrypt/live/domain.or.subdomain|
 
 ---
 ## Running the Service
