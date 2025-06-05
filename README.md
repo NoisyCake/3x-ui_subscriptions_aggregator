@@ -58,7 +58,7 @@ vless://...
 Download and install required tools:
 ```bash
 sudo apt update && sudo apt upgrade -y
-sudo apt install git  curl
+sudo apt install git curl
 
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
@@ -88,7 +88,7 @@ Edit the `.env` file with your own values:
 ---
 ## Running the Service
 
-Start everything via Docker: `docker compose up --build -d`.
+Start everything via Docker: `sudo docker compose up --build -d`.
 
 The final aggregated link will depend on the contents of your config file and your purposes:
 1. If there are only direct links or subscription links aren’t needed: `https://{SERVER_NAME}:{PORT}/{URL}/{SUB_NAME}`;

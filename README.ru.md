@@ -59,7 +59,7 @@ vless://...
 Скачайте и установите необходимые инструменты:
 ```bash
 sudo apt update && sudo apt upgrade -y
-sudo apt install git  curl
+sudo apt install git curl
 
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
@@ -89,7 +89,7 @@ cp .env.template .env
 ---
 ## Запуск
 
-Запуск производится командой `docker compose up --build -d`.
+Запуск производится командой `sudo docker compose up --build -d`.
 
 Общая ссылка на объединение конфигов может выглядеть по-разному:
 1. Если в `.txt` нет подписочных ссылок или их не требуется использовать: `https://{SERVER_NAME}:{PORT}/{URL}/{SUB_NAME}`;
